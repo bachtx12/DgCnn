@@ -11,7 +11,7 @@ sys.path.append(BASE_DIR)
 sys.path.append(os.path.join(BASE_DIR, 'models'))
 sys.path.append(os.path.join(BASE_DIR, 'utils'))
 sys.path.append(os.path.join(BASE_DIR, 'data_utils'))
-from data_utils import normalize_point_cloud, rotate_point_cloud, jitter_point_cloud, center_point_cloud
+from data_utils import normalize_point_cloud, rotate_point_cloud, jitter_point_cloud, center_point_cloud, translate_pointcloud
 class ScanObjectNNDataset(data.Dataset):
     def __init__(self,
                  root,
@@ -55,8 +55,9 @@ class ScanObjectNNDataset(data.Dataset):
         point_set = normalize_point_cloud(point_set)
         point_set = point_set[0:self.npoints, :]
         if self.data_augmentation:
-            point_set = rotate_point_cloud(point_set)
-            point_set = jitter_point_cloud(point_set)
+            # point_set = rotate_point_cloud(point_set)
+            # point_set = jitter_point_cloud(point_set)
+            point_set = translate_pointcloud(point_set)
         point_set = torch.from_numpy(point_set.astype(np.float32))
         cls = torch.from_numpy(np.array([cls]).astype(np.int64))
         return point_set, cls
