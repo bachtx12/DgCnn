@@ -77,7 +77,7 @@ def train():
             root=args.dataset_path,
             npoints=args.num_point,
             split='train',
-            data_augmentation=True        
+            data_augmentation=args.data_aug        
             )
         test_dataset = ModelNetDataset(
             root=args.dataset_path,
@@ -93,7 +93,8 @@ def train():
         dataset = ScanObjectNNDataset(
             root=args.dataset_path,
             npoints=args.num_point,
-            split='train')
+            split='train',
+            data_augmentation=args.data_aug)
 
         test_dataset = ScanObjectNNDataset(
             root=args.dataset_path,
@@ -104,7 +105,8 @@ def train():
         dataset = ScanObjectNNDataset(
             root=args.dataset_path,
             npoints=args.num_point,
-            split='train')
+            split='train',
+            data_augmentation=args.data_aug)
 
         test_dataset = ScanObjectNNDataset(
             root=args.dataset_path,
@@ -116,7 +118,8 @@ def train():
             root=args.dataset_path,
             npoints=args.num_point,
             small_data=True,
-            split='train')
+            split='train',
+            data_augmentation=args.data_aug)
 
         test_dataset = ScanObjectNNDataset(
             root=args.dataset_path,
