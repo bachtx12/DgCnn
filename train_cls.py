@@ -54,6 +54,8 @@ def parse_args():
                         help='Num of nearest neighbors to use')
     parser.add_argument('--model_path', type=str, default='', metavar='N',
                         help='Pretrained model path')
+    parser.add_argument('--data_aug', type=bool, default=True, metavar='N',
+                        help='Using data augmentation for training phase')
     return parser.parse_args()
 
 def train():
@@ -84,7 +86,7 @@ def train():
             data_augmentation=False        
             )
     elif args.dataset_type == 'modelnet40h5py':
-        dataset = ModelNetDataset_H5PY(filelist=args.dataset_path+'/train.txt', num_point=args.num_point, data_augmentation=True)
+        dataset = ModelNetDataset_H5PY(filelist=args.dataset_path+'/train.txt', num_point=args.num_point, data_augmentation=args.data_aug)
 
         test_dataset = ModelNetDataset_H5PY(filelist=args.dataset_path+'/test.txt', num_point=args.num_point, data_augmentation=False)
     elif args.dataset_type == 'scanobjectnn':

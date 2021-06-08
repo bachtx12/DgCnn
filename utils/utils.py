@@ -16,7 +16,7 @@ def copy_parameters(model, pretrained, verbose=True, part_seg=False):
         pretrained_dict = pretrained_dict['model_state_dict']
         pretrained_dict = {k[7:]: v for k, v in pretrained_dict.items()} # remove name module. 
     except:
-        pass
+        print('Not OcCo pretrained')
     pretrained_dict = {k: v for k, v in pretrained_dict.items() if
                        k in feat_dict and pretrained_dict[k].size() == feat_dict[k].size()}
 

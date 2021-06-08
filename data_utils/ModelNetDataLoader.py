@@ -45,7 +45,7 @@ class ModelNetDataset_H5PY(data.Dataset):
         
         if self.data_augmentation:
             # point_set = rotate_point_cloud(point_set)
-            # point_set = jitter_point_cloud(point_set)
+            point_set = jitter_point_cloud(point_set)
             point_set = translate_pointcloud(point_set)
             np.random.shuffle(point_set)
 
@@ -84,7 +84,7 @@ class ModelNetDataset(data.Dataset):
         point_set = point_set[0:self.npoints, :]
         if self.data_augmentation:
             # point_set = rotate_point_cloud(point_set)
-            # point_set = jitter_point_cloud(point_set)
+            point_set = jitter_point_cloud(point_set)
             point_set = translate_pointcloud(point_set)
 
         point_set = torch.from_numpy(point_set.astype(np.float32))
