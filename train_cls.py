@@ -100,6 +100,17 @@ def train():
             split='test',
             npoints=args.num_point,
             data_augmentation=False)
+    elif args.dataset_type == 'scanobjectnnbg':
+        dataset = ScanObjectNNDataset(
+            root=args.dataset_path,
+            npoints=args.num_point,
+            split='train')
+
+        test_dataset = ScanObjectNNDataset(
+            root=args.dataset_path,
+            split='test',
+            npoints=args.num_point,
+            data_augmentation=False)
     elif args.dataset_type == 'scanobjectnn10':
         dataset = ScanObjectNNDataset(
             root=args.dataset_path,
