@@ -51,8 +51,8 @@ class ScanObjectNNDataset(data.Dataset):
         point_set = np.copy(self.data[index])
         cls = self.label[index]
         # print(np.max(np.sqrt(np.sum(point_set**2, axis=1))))
-        # point_set = center_point_cloud(point_set)
-        # point_set = normalize_point_cloud(point_set)
+        point_set = center_point_cloud(point_set)
+        point_set = normalize_point_cloud(point_set)
         point_set = point_set[0:self.npoints, :]
         if self.data_augmentation:
             # point_set = rotate_point_cloud(point_set)
