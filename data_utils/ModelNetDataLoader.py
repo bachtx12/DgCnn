@@ -56,12 +56,14 @@ class ModelNetDataset(data.Dataset):
                  root,
                  npoints=1024,
                  split='train',
+                 test_class='all',
                  data_augmentation=True):
         self.npoints = npoints
         self.root = root
         self.split = split
         self.data_augmentation = data_augmentation
         self.cats = {}
+        self.test_class = test_class
         idx = 0
         with open(os.path.join(self.root,'modelnet_id.txt')) as f:
             for line in f:
@@ -70,8 +72,11 @@ class ModelNetDataset(data.Dataset):
         self.paths = []
         self.classes = dict(zip(sorted(self.cats), range(len(self.cats))))
         self.num_classes = len(self.cats)
-        for cat in self.cats:
-            self.paths +=glob.glob('%s/%s/%s/*'%(self.root,cat,self.split))
+        if self.test_class=='all':
+            for cat in self.cats:
+                self.paths +=glob.glob('%s/%s/%s/*'%(self.root,cat,self.split))
+        else:
+            self.paths +=glob.glob('%s/%s/%s/*'%(self.root,self.test_class,self.split))
 
     def __getitem__(self, index):
         fn = self.paths[index]
