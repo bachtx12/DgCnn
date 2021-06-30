@@ -85,6 +85,19 @@ def train():
             split='test',
             data_augmentation=False        
             )
+    elif args.dataset_type == 'modelnet40_10':
+        dataset = ModelNetDataset(
+            root=args.dataset_path,
+            npoints=args.num_point,
+            split='train',
+            data_augmentation=args.data_aug        
+            )
+        test_dataset = ModelNetDataset(
+            root=args.dataset_path,
+            npoints=args.num_point,
+            split='test',
+            data_augmentation=False        
+            )
     elif args.dataset_type == 'modelnet40h5py':
         dataset = ModelNetDataset_H5PY(filelist=args.dataset_path+'/train.txt', num_point=args.num_point, data_augmentation=args.data_aug)
 
